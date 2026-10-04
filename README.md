@@ -3,8 +3,8 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/express-5.x-lightgrey.svg?style=flat-square&logo=express)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas%20%7C%20Mongoose-green.svg?style=flat-square&logo=mongodb)](https://www.mongodb.com/atlas)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue.svg?style=flat-square&logo=github)](https://github.com/USERNAME/soundwave)
-[![Render](https://img.shields.io/badge/Deploy-Render-black.svg?style=flat-square&logo=render)](https://render.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue.svg?style=flat-square&logo=github)](https://github.com/dubeydiksha/soundwave)
+[![Render Live](https://img.shields.io/badge/Live%20Demo-Render-brightgreen.svg?style=flat-square&logo=render)](https://soundwave-gizr.onrender.com)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
 
 SoundWave is a full-stack, responsive music streaming web application inspired by Spotify. Built with vanilla HTML/CSS/JavaScript on the frontend and Node.js, Express, and MongoDB Atlas on the backend. It features secure authentication, an original dark-mode design system with audio waveforms, automated song seeding with CSS gradient covers, and full CRUD functionality for personal **"Liked Songs"**.
