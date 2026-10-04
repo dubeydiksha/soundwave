@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up - SoundWave</title>
+  <meta name="description" content="Sign up for SoundWave to start listening and creating your personal Liked Songs library.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231DB954'><circle cx='12' cy='12' r='11' fill='%23121212'/><rect x='6' y='9' width='2' height='6' rx='1' fill='%231DB954'/><rect x='10' y='6' width='2' height='12' rx='1' fill='%231DB954'/><rect x='14' y='8' width='2' height='8' rx='1' fill='%231DB954'/><rect x='18' y='11' width='2' height='2' rx='1' fill='%231DB954'/></svg>">
+</head>
+<body class="auth-page">
+
+  <!-- Minimal Header (Logo only) -->
+  <header class="auth-header">
+    <a href="/" class="brand-logo" aria-label="SoundWave Home">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="9" width="2.5" height="6" rx="1.25" fill="currentColor"/>
+          <rect x="8.5" y="5" width="2.5" height="14" rx="1.25" fill="currentColor"/>
+          <rect x="13" y="7" width="2.5" height="10" rx="1.25" fill="currentColor"/>
+          <rect x="17.5" y="10" width="2.5" height="4" rx="1.25" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="brand-name">Sound<span>Wave</span></span>
+    </a>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Sign up to start listening</h1>
+      <p class="auth-subtitle">Create your free account. No credit card needed.</p>
+
+      <!-- Global Alert Container -->
+      <div id="formAlert" class="form-alert" role="alert"></div>
+
+      <form id="signupForm" novalidate>
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="name" class="form-label">What should we call you? (Full name)</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            class="form-input" 
+            placeholder="Enter your name" 
+            required 
+            minlength="2" 
+            maxlength="60"
+            autocomplete="name"
+          >
+          <div class="field-error-msg" id="nameError"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-input" 
+            placeholder="name@domain.com" 
+            required
+            autocomplete="email"
+          >
+          <div class="field-error-msg" id="emailError"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Create a password</label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="form-input" 
+              placeholder="Create a strong password" 
+              required
+              autocomplete="new-password"
+            >
+            <button type="button" class="toggle-password-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <!-- Password Strength Meter -->
+          <div class="strength-meter">
+            <div class="strength-bar-track">
+              <div class="strength-bar-fill" id="strengthBar"></div>
+            </div>
+            <div class="strength-text">
+              <span id="strengthLabel">Enter password</span>
+              <span>Min 8 chars, 1 letter, 1 number</span>
+            </div>
+          </div>
+          <div class="field-error-msg" id="passwordError"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm your password</label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              class="form-input" 
+              placeholder="Re-enter your password" 
+              required
+              autocomplete="new-password"
+            >
+            <button type="button" class="toggle-password-btn" id="toggleConfirmPasswordBtn" aria-label="Toggle confirm password visibility">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div class="field-error-msg" id="confirmPasswordError"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary auth-submit-btn" id="submitBtn">
+          <span id="btnText">Sign Up</span>
+          <span id="btnSpinner" class="btn-loading-spinner" style="display: none;"></span>
+        </button>
+      </form>
+
+      <div class="auth-footer-prompt">
+        Already have an account? <a href="/login">Log in</a>.
+      </div>
+    </div>
+  </main>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>

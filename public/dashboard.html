@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundWave - Dashboard & Web Player</title>
+  <meta name="description" content="Manage your Liked Songs and stream high-fidelity fictional music on SoundWave.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231DB954'><circle cx='12' cy='12' r='11' fill='%23121212'/><rect x='6' y='9' width='2' height='6' rx='1' fill='%231DB954'/><rect x='10' y='6' width='2' height='12' rx='1' fill='%231DB954'/><rect x='14' y='8' width='2' height='8' rx='1' fill='%231DB954'/><rect x='18' y='11' width='2' height='2' rx='1' fill='%231DB954'/></svg>">
+</head>
+<body class="dashboard-layout">
+
+  <!-- Sticky Top Navbar -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="/dashboard" class="brand-logo" aria-label="SoundWave Home">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="9" width="2.5" height="6" rx="1.25" fill="currentColor"/>
+            <rect x="8.5" y="5" width="2.5" height="14" rx="1.25" fill="currentColor"/>
+            <rect x="13" y="7" width="2.5" height="10" rx="1.25" fill="currentColor"/>
+            <rect x="17.5" y="10" width="2.5" height="4" rx="1.25" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="brand-name">Sound<span>Wave</span></span>
+      </a>
+
+      <!-- User Profile & Log Out -->
+      <div class="nav-actions">
+        <a href="/" class="btn btn-secondary btn-small" title="Return to Landing Page">Home</a>
+        <div class="user-badge" id="navUserBadge">
+          <div class="user-avatar-circle" id="userAvatarLetter">U</div>
+          <span id="navUserName">Loading...</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-small" id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Greeting Header -->
+  <header class="dashboard-hero">
+    <div class="container">
+      <h1 class="user-greeting" id="greetingHeader">Welcome back!</h1>
+      <p class="dashboard-subtitle">
+        Your personal library and curated soundscape. Listen, like, and organize your favorite fictional hits.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container" style="flex: 1; padding-top: 20px;">
+
+    <!-- SECTION 1: LIKED SONGS (CRUD READ / DELETE / UPDATE) -->
+    <section class="dashboard-section" id="likedSection">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#1DB954" stroke="#1DB954" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            Liked Songs <span id="likedCountBadge" style="font-size: 1.1rem; color: var(--text-secondary); font-weight: 500;">(0)</span>
+          </h2>
+          <p class="section-subtitle">Tracks you've added to your private collection.</p>
+        </div>
+      </div>
+
+      <!-- Liked Songs Grid -->
+      <div class="songs-grid" id="likedSongsGrid">
+        <!-- Loading skeletons -->
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ALL SONGS (SEARCH, GENRE FILTER, LIKE/CREATE) -->
+    <section class="dashboard-section" id="allSongsSection">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+            Explore Music Library
+          </h2>
+          <p class="section-subtitle">Browse all fictional tracks, filter by genre, and add to your library.</p>
+        </div>
+      </div>
+
+      <!-- Search and Genre Filters -->
+      <div class="controls-bar">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Search songs, artists, albums..."
+            autocomplete="off"
+          >
+        </div>
+
+        <!-- Genre Chips Filter -->
+        <div class="genre-chips-container" id="genreChips">
+          <button type="button" class="genre-chip active" data-genre="All">All Genres</button>
+          <button type="button" class="genre-chip" data-genre="Synthwave">Synthwave</button>
+          <button type="button" class="genre-chip" data-genre="Indie Pop">Indie Pop</button>
+          <button type="button" class="genre-chip" data-genre="Electronic">Electronic</button>
+          <button type="button" class="genre-chip" data-genre="Lo-Fi Chill">Lo-Fi Chill</button>
+          <button type="button" class="genre-chip" data-genre="R&B">R&B</button>
+          <button type="button" class="genre-chip" data-genre="Alt Rock">Alt Rock</button>
+          <button type="button" class="genre-chip" data-genre="Hip-Hop">Hip-Hop</button>
+          <button type="button" class="genre-chip" data-genre="Deep House">Deep House</button>
+        </div>
+      </div>
+
+      <!-- All Songs Grid -->
+      <div class="songs-grid" id="allSongsGrid">
+        <!-- Skeletons -->
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-cover"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Delete Confirmation Dialog Modal -->
+  <div class="modal-overlay" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h3 class="modal-title" id="modalTitle">Remove from Liked Songs?</h3>
+      <p class="modal-message" id="modalMessage">
+        Are you sure you want to remove this track from your Liked Songs library?
+      </p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline btn-small" id="modalCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-danger btn-small" id="modalConfirmBtn">Remove Song</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Bottom Player Bar -->
+  <div class="player-bar" id="playerBar">
+    <!-- Current Playing Track Info -->
+    <div class="player-track-info">
+      <div class="player-thumb" id="playerThumb" style="background: linear-gradient(135deg, #1DB954, #121212);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+      </div>
+      <div class="player-meta">
+        <div class="player-song-title" id="playerTitle">Select a track to play</div>
+        <div class="player-song-artist" id="playerArtist">SoundWave Player</div>
+      </div>
+      <button type="button" class="player-btn-secondary" id="playerLikeBtn" aria-label="Like current playing song" style="margin-left: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Playback Controls & Progress Bar -->
+    <div class="player-controls">
+      <div class="player-buttons">
+        <button type="button" class="player-btn-secondary" id="playerShuffleBtn" aria-label="Shuffle" title="Shuffle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 3 21 3 21 8"></polyline>
+            <line x1="4" y1="20" x2="21" y2="3"></line>
+            <polyline points="21 16 21 21 16 21"></polyline>
+            <line x1="15" y1="15" x2="21" y2="21"></line>
+            <line x1="4" y1="4" x2="9" y2="9"></line>
+          </svg>
+        </button>
+        <button type="button" class="player-btn-secondary" id="playerPrevBtn" aria-label="Previous track">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+            <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line>
+          </svg>
+        </button>
+        <button type="button" class="player-btn-main" id="playerPlayPauseBtn" aria-label="Play/Pause">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" id="playIcon">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+        <button type="button" class="player-btn-secondary" id="playerNextBtn" aria-label="Next track">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line>
+          </svg>
+        </button>
+        <button type="button" class="player-btn-secondary" id="playerRepeatBtn" aria-label="Repeat" title="Repeat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="17 1 21 5 17 9"></polyline>
+            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+            <polyline points="7 23 3 19 7 15"></polyline>
+            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="progress-container">
+        <span class="time-stamp" id="currentTimeLabel">0:00</span>
+        <div class="progress-bar-bg" id="progressBarBg">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+        </div>
+        <span class="time-stamp" id="totalTimeLabel">0:00</span>
+      </div>
+    </div>
+
+    <!-- Volume & Extras -->
+    <div class="player-extra-controls">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-secondary">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+      <div class="volume-bar-bg" id="volumeBarBg" title="Volume">
+        <div class="volume-bar-fill" id="volumeBarFill" style="width: 75%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
